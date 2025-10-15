@@ -1,19 +1,14 @@
-version: '3'
 services:
-  server:
-    build: ./server
-    ports:
-      - "5000:5000"
-    volumes:
-      - ./server:/app
-    environment:
-      - NODE_ENV=development
-
-  client:
-    build: ./client
+  frontend:
+    build:
+      context: ./frontend
     ports:
       - "3000:80"
-    volumes:
-      - ./client:/app
-    environment:
-      - NODE_ENV=production
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
